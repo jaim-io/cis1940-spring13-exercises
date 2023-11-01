@@ -1,55 +1,7 @@
 {-
-  >> Log file parsing
-  We’re really not sure what happened, but we did manage to recover
-  the log file error.log. It seems to consist of a different log message
-  on each line. Each line begins with a character indicating the type of
-  log message it represents:
-  • ’I’ for informational messages,
-  • ’W’ for warnings, and
-  • ’E’ for errors.
+  For context, read the PDF.
+  -}
 
-  The error message lines then have an integer indicating the severity
-  of the error, with 1 being the sort of error you might get around to
-  caring about sometime next summer, and 100 being epic, catastrophic
-  failure. All the types of log messages then have an integer time stamp
-  followed by textual content that runs to the end of the line. Here is a
-  snippet of the log file including an informational message followed
-  by a level 2 error message:
-  I 147 mice in the air, I’m afraid, but you might catch a bat, and
-  E 2 148 #56k istereadeat lo d200ff] BOOTMEM
-
-  It’s all quite confusing; clearly we need a program to sort through
-  this mess. We’ve come up with some data types to capture the structure of this log file format:
-
-  data MessageType = Info
-                   | Warning
-                   | Error Int
-                   deriving (Show, Eq)
-
-  type TimeStamp = Int
-
-  data LogMessage = LogMessage MessageType TimeStamp String
-                  | Unknown String
-                  deriving (Show, Eq)
-
-  Note that LogMessage has two constructors: one to represent normallyformatted log messages, and one to represent anything else that does
-  not fit the proper format.
-  We’ve provided you with a module Log.hs containing these data
-  type declarations, along with some other useful functions. Download
-  Log.hs and put it in the same folder where you intend to put your
-  homework assignment. Please name your homework assignment
-  LogAnalysis.hs (or .lhs if you want to make it a literate Haskell
-  document). The first few lines of LogAnalysis.hs should look like
-  this:
-
-  {-# OPTIONS_GHC -Wall #-}
-  module LogAnalysis where
-
-  import Log
-
-  which sets up your file as a module named LogAnalysis, and imports the module from Log.hs so you can use the types and functions
-  it provides.
--}
 {-
   Exercise 1 The first step is figuring out how to parse an individual
   message. Define a function
